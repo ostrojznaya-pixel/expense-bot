@@ -6,7 +6,6 @@ load_dotenv()
 # Telegram
 TELEGRAM_BOT_TOKEN: str = os.getenv("TELEGRAM_BOT_TOKEN", "")
 
-# Поддержка нескольких пользователей — через запятую: "500635662,1662643304"
 _raw_ids = os.getenv("TELEGRAM_ALLOWED_USER_IDS", os.getenv("TELEGRAM_ALLOWED_USER_ID", ""))
 TELEGRAM_ALLOWED_USER_IDS: set[int] = {
     int(uid.strip()) for uid in _raw_ids.split(",") if uid.strip().isdigit()
@@ -24,12 +23,17 @@ NOTION_SHOPPING_DB_ID: str = os.getenv("NOTION_SHOPPING_DB_ID", "")
 # Categories
 CATEGORIES = [
     "Продукты",
+    "Кафе",
+    "Еда навынос",
     "Курение",
     "Животные",
     "Одежда",
-    "Посиделки",
     "Автомобиль",
     "Дом",
+    "Здоровье",
+    "Спорт",
+    "Бьюти",
+    "Уход",
     "Другое",
 ]
 
