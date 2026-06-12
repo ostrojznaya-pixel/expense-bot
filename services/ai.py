@@ -2,14 +2,14 @@ import base64
 import json
 from typing import Optional
 from openai import AsyncOpenAI
-from pydantic import BaseModel
+
 from loguru import logger
 
 from config.settings import OPENAI_API_KEY, OPENAI_MODEL, CATEGORIES, CURRENCY
 
 client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 
-class ExpenseResult(BaseModel):
+class ExpenseResult:
     intent: str
     amount: Optional[float] = None
     category: Optional[str] = None
