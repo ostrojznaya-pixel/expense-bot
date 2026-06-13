@@ -78,7 +78,7 @@ async def analyze_receipt_image(image_bytes: bytes) -> ExpenseResult:
             temperature=0,
             max_tokens=500,
         )
-        raw = response.choices[0].message.content.strip()
+       raw = response.choices[0].message.content.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
         data = json.loads(raw)
         return ExpenseResult(
             intent="EXPENSE",
