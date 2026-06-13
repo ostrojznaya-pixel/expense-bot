@@ -49,7 +49,7 @@ async def analyze_text(text: str) -> ExpenseResult:
             temperature=0,
             max_tokens=300,
         )
-        raw = response.choices[0].message.content.strip()
+       raw = response.choices[0].message.content.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
         data = json.loads(raw)
         return ExpenseResult(
             intent=data.get("intent", "UNKNOWN"),
