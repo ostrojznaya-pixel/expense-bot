@@ -17,7 +17,7 @@ router = Router()
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+    from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
         kb = ReplyKeyboardMarkup(keyboard=[
             [KeyboardButton(text="📊 Расходы за неделю"), KeyboardButton(text="📅 Расходы за месяц")],
             [KeyboardButton(text="🛒 Список покупок"), KeyboardButton(text="🗑 Очистить список")],
