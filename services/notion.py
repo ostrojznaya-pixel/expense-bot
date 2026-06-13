@@ -60,7 +60,26 @@ async def add_expense(
     except Exception as e:
         logger.error(f"Error adding expense to Notion: {e}")
         return False
-
+async def delete_last_expense() -> str:
+    """Delete the most recent expense from Notion."""
+    try:
+        response = await notion.databases.query(
+            database_id=NOTION_EXPENSES_DB_ID,
+            sorts=[{"property": "Date", "direction": "descending"}],
+            page_size=1,
+        )
+        if not response["results"]:
+            return "Расходов нет"
+        page = response["results"][0]
+        props = page["properties"]
+        title_list = props["Title"]["title"]
+        title = title_list[0]["text"]["content"] if title_list else "—"
+        amount = props["Amount"]["number"] or 0
+        await notion.pages.update(page["id"], archived=True)
+        return f"✅ Удалён последний расход: {title} — {amount} грн"
+    except Exception as e:
+        logger.error(f"Error deleting expense: {e}")
+        return "Ошибка при удалении"
 
 async def get_expenses_for_period(
     start_date: date, end_date: date
