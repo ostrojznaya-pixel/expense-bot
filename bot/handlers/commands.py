@@ -17,8 +17,8 @@ router = Router()
 MAIN_KB = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text="📊 Расходы за неделю"), KeyboardButton(text="📅 Расходы за месяц")],
     [KeyboardButton(text="🛒 Список покупок"), KeyboardButton(text="🗑 Очистить список")],
+    [KeyboardButton(text="↩️ Отменить последний расход")],
 ], resize_keyboard=True)
-
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
@@ -63,3 +63,8 @@ async def cmd_month(message: Message):
     start = today.replace(day=1)
     expenses = await get_expenses_for_period(start, today)
     await message.answer(format_expenses_report(expenses, f"{today.strftime('%B %Y')}"), parse_mode="HTML", reply_markup=MAIN_KB)
+    @router.message(lambda m: m.text == "↩️ Отменить последний расход")
+async def cmd_undo(message: Message):
+    from services.notion import delete_last_expense
+    result = await delete_last_expense()
+    await message.answer(result, reply_markup=MAIN_KB)
