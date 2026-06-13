@@ -22,8 +22,10 @@ NOTION_SHOPPING_DB_ID: str = os.getenv("NOTION_SHOPPING_DB_ID", "")
 
 # Categories
 CATEGORIES = [
-    "Продукты",
+   "Продукты",
     "Кафе",
+    "Алкоголь",
+    "Посиделки",
     "Еда навынос",
     "Курение",
     "Животные",
