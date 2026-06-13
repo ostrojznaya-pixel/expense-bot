@@ -17,18 +17,20 @@ router = Router()
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
-    await message.answer(
-        "👋 Привет! Я твой личный ассистент для учёта расходов.\n\n"
-        "Что я умею:\n"
-        "📸 <b>Фото чека</b> — распознаю и сохраню расход\n"
-        "💬 <b>Текст</b> — <i>«Купила кофе за 75 грн»</i>\n"
-        "📝 <b>Список</b> — <i>«Закончилось молоко»</i>\n\n"
-        "<b>Команды:</b>\n"
-        "/shopping — список покупок\n"
-        "/clear_shopping — очистить список\n"
-        "/month — расходы за месяц\n"
-        "/week — расходы за неделю",
-        parse_mode="HTML",
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+        kb = ReplyKeyboardMarkup(keyboard=[
+            [KeyboardButton(text="📊 Расходы за неделю"), KeyboardButton(text="📅 Расходы за месяц")],
+            [KeyboardButton(text="🛒 Список покупок"), KeyboardButton(text="🗑 Очистить список")],
+        ], resize_keyboard=True)
+        await message.answer(
+            "👋 Привет! Я твой личный ассистент для учёта расходов.\n\n"
+            "Просто напиши мне:\n"
+            "🧾 <b>Фото чека</b> — распознаю и сохраню расход\n"
+            "💬 <b>Текст</b> — «Купила кофе за 75 грн»\n"
+            "📝 <b>Список</b> — «Закончилось молоко»\n",
+            parse_mode="HTML",
+            reply_markup=kb,
+        )  
     )
 
 
