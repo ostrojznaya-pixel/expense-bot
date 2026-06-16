@@ -52,7 +52,7 @@ async def cmd_clear_shopping(message: Message):
 @router.message(Command("week"))
 async def cmd_week(message: Message):
     today = date.today()
-    start = today - timedelta(days=7)
+    start = today - timedelta(days=today.weekday())
     expenses = await get_expenses_for_period(start, today)
     await message.answer(format_expenses_report(expenses, "неделю"), parse_mode="HTML", reply_markup=MAIN_KB)
 
