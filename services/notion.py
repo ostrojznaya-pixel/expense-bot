@@ -213,3 +213,4 @@ async def clear_shopping_list() -> int:
     except Exception as e:
         logger.error(f"Error deleting shopping item: {e}")
         return False
+
