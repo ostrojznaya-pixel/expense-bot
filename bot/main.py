@@ -38,8 +38,8 @@ async def main():
     dp.include_router(text.router)
 
     logger.info("🤖 Bot started. Polling...")
-    await dp.start_polling(bot, allowed_updates=["message"])
-
+    await dp.start_polling(bot, allowed_updates=["message", "callback_query"])
+    
 
 if __name__ == "__main__":
     asyncio.run(main())
