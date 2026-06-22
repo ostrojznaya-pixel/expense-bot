@@ -72,4 +72,4 @@ async def callback_delete_item(callback: CallbackQuery):
 @router.message(Command("clear_shopping"))
 async def cmd_clear_shopping(message: Message):
     await clear_shopping_list()
-    await message.answer("🗑 Список покупок
+    await message.answer("🗑 Список покупок очищен!", reply_markup=MAIN_KB)
