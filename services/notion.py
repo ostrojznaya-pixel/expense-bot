@@ -202,3 +202,14 @@ async def clear_shopping_list() -> int:
     except Exception as e:
         logger.error(f"Error clearing shopping list: {e}")
         return 0
+        async def delete_shopping_item(page_id: str) -> bool:
+    """Mark a shopping item as done (checked)."""
+    try:
+        await notion.pages.update(
+            page_id=page_id,
+            properties={"Status": {"checkbox": True}},
+        )
+        return True
+    except Exception as e:
+        logger.error(f"Error deleting shopping item: {e}")
+        return False
