@@ -90,7 +90,7 @@ async def cmd_clear_shopping(message: Message):
     await message.answer("🧹 Список покупок очищен!", reply_markup=MAIN_KB)
 
 
-@router.message(lambda m: m.text == "❌ Отменить последний расход")
+@router.message(lambda m: m.text and "Отменить последний расход" in m.text)
 async def cmd_cancel_last(message: Message):
     result = await delete_last_expense()
     await message.answer(result, reply_markup=MAIN_KB)
