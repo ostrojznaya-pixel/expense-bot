@@ -2,7 +2,7 @@ from .ai import analyze_text, analyze_receipt_image
 from .notion import (
     add_expense,
     get_expenses_for_period,
-    энdelete_last_expense,
+    delete_last_expense,
     add_shopping_item,
     get_shopping_list,
     clear_shopping_list,
