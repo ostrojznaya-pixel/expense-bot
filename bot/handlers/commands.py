@@ -9,6 +9,7 @@ from services import (
     get_expenses_for_period,
     format_shopping_list,
     format_expenses_report,
+    delete_last_expense,
 )
 from services.notion import delete_shopping_item
 
@@ -87,3 +88,7 @@ async def callback_delete_item(callback: CallbackQuery):
 async def cmd_clear_shopping(message: Message):
     await clear_shopping_list()
     await message.answer("🗑 Список покупок очищен!", reply_markup=MAIN_KB)
+    @router.message(lambda m: m.text == "❌ Отменить последний расход")
+async def cmd_cancel_last(message: Message):
+    result = await delete_last_expense()
+    await message.answer(result, reply_markup=MAIN_KB)
